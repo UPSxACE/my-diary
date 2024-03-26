@@ -1,0 +1,26 @@
+@tailwind components;
+@tailwind utilities;
+
+.white-img-shadow {
+  filter: drop-shadow(1px 1px 1px #0000004f);
+}
+
+.hljs {
+  /* background-color: transparent !important; */
+}
+
+#note-view #note-content pre {
+  padding: 0 !important;
+}
+
+#note-view #note-content pre code {
+  @apply !text-base;
+}
+
+#note-view #note-content h1 {
+  @apply text-3xl;
+}
+
+#note-view #note-content p {
+  @apply text-xl;
+}
