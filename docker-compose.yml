@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  nginx:
+    container_name: NginxContainer
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - mynetwork
+    depends_on:
+      - web
+    restart: always
+  web:
+    container_name: WebContainer
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    networks:
+      - mynetwork
+    restart: unless-stopped
+    depends_on:
+      - postgres_db
+  postgres_db:
+    container_name: PostgresDbContainer
+    image: postgres:latest
+    volumes:
+      - postgres_db:/var/lib/postgresql/data # We are creating a directory var/lib/mysql inside the volume "postgres_db"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - mynetwork
+    restart: always
+    driver: local
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  postgres_db:
+    driver: local
