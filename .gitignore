@@ -1,0 +1,9 @@
+coverage.html
+coverage.out
+**/docs/
+**/dist/
+**/.parcel-cache
+**/.vscode
+/tmp
+/db
+.env

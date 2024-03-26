@@ -1,0 +1,14 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+    queries:
+      - "sqlc/queries/note.sql"
+      - "sqlc/queries/user.sql"
+      - "sqlc/queries/migrations.sql"
+    schema: "sqlc/final_schema.sql"
+    gen:
+      go:
+        emit_json_tags: true
+        package: "db"
+        out: "db"
+        sql_package: "pgx/v5"
