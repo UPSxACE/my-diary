@@ -1,8 +1,45 @@
-version: "3.9"
-
 services:
+  postgres_db:
+    container_name: postgres_db
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d my-diary -U app"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    env_file: .env
+    image: postgres:latest
+    volumes:
+      - postgres_db_data:/var/lib/postgresql/data # We are creating a directory var/lib/mysql inside the volume "postgres_db"
+    networks:
+      - mynetwork
+    restart: always
+    ports:
+      - 5432:5432
+  api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    networks:
+      - mynetwork
+    restart: always
+    depends_on:
+      - postgres_db
+  web:
+    container_name: web
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    networks:
+      - mynetwork
+    restart: unless-stopped
+    depends_on:
+      - api
   nginx:
-    container_name: NginxContainer
+    container_name: nginx
     build:
       context: ./nginx
       dockerfile: Dockerfile
@@ -13,33 +50,11 @@ services:
     depends_on:
       - web
     restart: always
-  web:
-    container_name: WebContainer
-    build:
-      context: ./web
-      dockerfile: Dockerfile
-    networks:
-      - mynetwork
-    restart: unless-stopped
-    depends_on:
-      - postgres_db
-  postgres_db:
-    container_name: PostgresDbContainer
-    image: postgres:latest
-    volumes:
-      - postgres_db:/var/lib/postgresql/data # We are creating a directory var/lib/mysql inside the volume "postgres_db"
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    networks:
-      - mynetwork
-    restart: always
-    driver: local
 
 networks:
   mynetwork:
     driver: bridge
 
 volumes:
-  postgres_db:
+  postgres_db_data:
     driver: local
