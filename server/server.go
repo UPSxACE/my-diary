@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"os"
 
 	"github.com/UPSxACE/my-diary-api/db"
 	"github.com/go-playground/validator/v10"
@@ -29,7 +30,7 @@ func NewServer(devMode bool) *Server {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins:     []string{"http://localhost:1323", "http://localhost:3000"},
+		AllowOrigins:     []string{os.Getenv("CORS_ORIGIN_1"), os.Getenv("CORS_ORIGIN_2")},
 		AllowHeaders:     []string{"Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"},
 		AllowCredentials: true,
 		// echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept
