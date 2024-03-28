@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/UPSxACE/my-diary-api/db"
@@ -66,13 +67,14 @@ func (s *Server) postLoginRoute(c echo.Context) error {
 		return err
 	}
 
-	// Set authToken cookie
+	// Set myDiaryToken cookie
 	cookie := new(http.Cookie)
-	cookie.Name = "authToken"
+	cookie.Name = "myDiaryToken"
 	cookie.Value = signedJwt
 	cookie.Expires = expiresAt
 	cookie.HttpOnly = true
 	cookie.Path = "/"
+	cookie.Domain = os.Getenv("COOKIE_DOMAIN")
 	c.SetCookie(cookie)
 
 	return c.NoContent(http.StatusOK)
@@ -150,13 +152,14 @@ func (s *Server) postRegisterRoute(c echo.Context) error {
 		return err
 	}
 
-	// Set authToken cookie
+	// Set myDiaryToken cookie
 	cookie := new(http.Cookie)
-	cookie.Name = "authToken"
+	cookie.Name = "myDiaryToken"
 	cookie.Value = signedJwt
 	cookie.Expires = expiresAt
 	cookie.HttpOnly = true
 	cookie.Path = "/"
+	cookie.Domain = os.Getenv("COOKIE_DOMAIN")
 	c.SetCookie(cookie)
 
 	return c.NoContent(http.StatusCreated)
