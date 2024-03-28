@@ -27,7 +27,7 @@ type sessionRevokeList = map[userId]revokeTime
 func (s *Server) setupJwt() {
 	SECRET := os.Getenv("JWT_SECRET")
 	s.jwtConfig = echojwt.Config{
-		TokenLookup: "cookie:authToken,query:authToken",
+		TokenLookup: "cookie:myDiaryToken,query:myDiaryToken",
 		NewClaimsFunc: func(c echo.Context) jwt.Claims {
 			return new(jwtCustomClaims)
 		},
