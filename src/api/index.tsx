@@ -1,8 +1,8 @@
 "use client";
 import axios, { AxiosInstance } from "axios";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { AXIOS_CONFIG } from "./config";
 import { GetNotesParams, LoginBody, NewNoteBody, RegisterBody } from "./types";
+import { AXIOS_CONFIG } from "./client";
 
 export default class Api {
   axios: AxiosInstance;

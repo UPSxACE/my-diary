@@ -5,14 +5,14 @@ const guestRoutes = ["/login", "/register"];
 const privateRoutes = ["/app"];
 
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get("authToken")?.value;
+  const token = request.cookies.get("myDiaryToken")?.value;
 
   if (token && request.nextUrl.pathname === "/") {
     return NextResponse.redirect(new URL("/app", request.url));
   }
 
   const isGuestRoute = guestRoutes.some((route) =>
-    request.nextUrl.pathname.startsWith(route)
+    request.nextUrl.pathname.startsWith(route),
   );
 
   if (isGuestRoute && token) {
@@ -20,7 +20,7 @@ export function middleware(request: NextRequest) {
   }
 
   const isPrivateRoute = privateRoutes.some((route) =>
-    request.nextUrl.pathname.startsWith(route)
+    request.nextUrl.pathname.startsWith(route),
   );
 
   if (isPrivateRoute && !token) {

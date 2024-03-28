@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
-import jwtVerify from "../utils/jwt-verify";
 import { redirect } from "next/navigation";
+import jwtVerify from "../utils/jwt-verify";
 
 export default async function getToken(): Promise<string | null> {
-  const token = cookies().get("authToken")?.value;
+  const token = cookies().get("myDiaryToken")?.value;
 
   if (!token) {
     redirect("/");
