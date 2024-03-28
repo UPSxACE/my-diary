@@ -57,7 +57,7 @@ export default function Register() {
       name: "",
       password: "",
       repeat_password: "",
-      terms: true,
+      terms: false,
     },
 
     validate: {

@@ -10,7 +10,7 @@ interface UserProfile {
 }
 
 export default async function getProfileFromToken(): Promise<UserProfile | null> {
-  const token = cookies().get("authToken")?.value;
+  const token = cookies().get("myDiaryToken")?.value;
 
   if (!token) {
     redirect("/");

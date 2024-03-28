@@ -4,7 +4,8 @@ import "server-only";
 export default function isLoggedIn() {
   const cookieStore = cookies();
   const loggedIn =
-    cookieStore.has("authToken") && cookieStore.get("authToken")?.value !== "";
+    cookieStore.has("myDiaryToken") &&
+    cookieStore.get("authToken")?.value !== "";
 
   return loggedIn;
 }
