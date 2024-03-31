@@ -171,7 +171,7 @@ export default function Register() {
               <Link
                 target="_blank"
                 href="/privacy-policy"
-                className="text-black"
+                className="text-black dark:text-white"
                 rel="noopener noreferrer"
               >
                 I accept terms and conditions
