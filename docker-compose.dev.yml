@@ -1,0 +1,16 @@
+#docker compose -f docker-compose.yml -f docker-compose.dev.yml build
+#https://docs.docker.com/compose/multiple-compose-files/merge/
+
+services:
+  api:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.api.rule=Host(`${API_HOSTNAME}`)
+      ##
+      - traefik.http.routers.api.entrypoints=web
+  web:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nextjs.rule=Host(`${WEB_HOSTNAME}`)
+      ##
+      - traefik.http.routers.nextjs.entrypoints=web

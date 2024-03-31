@@ -4,12 +4,11 @@ services:
     container_name: traefik
     ports:
       - 80:80
-      - 443:443
       # -- (Optional) Enable Dashboard, don't do in production
       # - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      # - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
       - ./config/conf/:/etc/traefik/conf/
       - ./config/certs/:/etc/traefik/certs/
     # -- (Optional) When using Cloudflare as Cert Resolver
@@ -20,6 +19,15 @@ services:
       - web
     networks:
       - traefik_network
+    command:
+      # - "--api.insecure=true"
+      # - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.file.directory=/etc/traefik"
+      - "--providers.file.watch=true"
+      - "--entrypoints.web.address=:80"
+      # - "--log.level=DEBUG"
   postgres_db:
     container_name: postgres_db
     build:
@@ -44,10 +52,7 @@ services:
       - traefik_network
     labels:
       - traefik.enable=true
-      - traefik.http.routers.api.entrypoints=web
       - traefik.http.routers.api.rule=Host(`${API_HOSTNAME}`)
-      # - traefik.http.routers.api.tls=true
-      # - traefik.http.routers.api.tls.certresolver=production
   web:
     container_name: web
     build:
@@ -60,11 +65,7 @@ services:
       - traefik_network
     labels:
       - traefik.enable=true
-      - traefik.http.routers.nextjs.entrypoints=web
       - traefik.http.routers.nextjs.rule=Host(`${WEB_HOSTNAME}`)
-      # - traefik.http.routers.nextjs.tls=true
-      # - traefik.http.routers.nextjs.tls.certresolver=production
-
 networks:
   traefik_network:
     external: true

@@ -1,0 +1,54 @@
+#docker compose -f docker-compose.yml -f docker-compose.prod.yml build
+#https://docs.docker.com/compose/multiple-compose-files/merge/
+
+services:
+  traefik:
+    ports:
+      - 80:80
+      - 443:443
+      ##
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.file.directory=/etc/traefik"
+      - "--providers.file.watch=true"
+      - "--entrypoints.web.address=:80"
+      ##
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.staging.acme.httpchallenge=true"
+      - "--certificatesresolvers.staging.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.staging.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.staging.acme.storage=/etc/traefik/certs/acme.json"
+      - "--certificatesresolvers.production.acme.httpchallenge=true"
+      - "--certificatesresolvers.production.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.production.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.production.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.production.acme.storage=/etc/traefik/certs/acme.json"
+      # - "--log.level=DEBUG"
+  api:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.api.rule=Host(`${API_HOSTNAME}`)
+      ##
+      - traefik.http.routers.api.entrypoints=websecure
+      - traefik.http.routers.api.tls=true
+      - traefik.http.routers.api.tls.certresolver=${CERTRESOLVER}
+  web:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nextjs.rule=Host(`${WEB_HOSTNAME}`)
+      ##
+      - traefik.http.routers.nextjs.entrypoints=websecure
+      - traefik.http.routers.nextjs.tls=true
+      - traefik.http.routers.nextjs.tls.certresolver=${CERTRESOLVER}
+
+networks:
+  traefik_network:
+    external: true
+
+volumes:
+  postgres_db_data:
+    driver: local

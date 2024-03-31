@@ -1,7 +1,6 @@
 global:
   checkNewVersion: false
   sendAnonymousUsage: false
-
 # -- (Optional) Change Log Level and Format here...
 #     - loglevels [DEBUG, INFO, WARNING, ERROR, CRITICAL]
 #     - format [common, json, logfmt]
@@ -22,51 +21,56 @@ global:
 #   insecure: true
 
 # -- Change EntryPoints here...
-entryPoints:
-  web:
-    address: :80
-    # -- (Optional) Redirect all HTTP to HTTPS
-    # http:
-    #   redirections:
-    #     entryPoint:
-    #       to: websecure
-    #       scheme: https
-  # websecure:
-  #   address: :443
-  # -- (Optional) Add custom Entrypoint
-  # custom:
-  #   address: :8080
+# entryPoints:
+#   web:
+#     address: :80
+#     # -- (Optional) Redirect all HTTP to HTTPS
+#     http:
+#       redirections:
+#         entryPoint:
+#           to: websecure
+#           scheme: https
+#   websecure:
+#     address: :443
+#     http:
+#       tls:
+#         certResolver: staging
+# -- (Optional) Add custom Entrypoint
+# custom:
+#   address: :8080
 
 # -- Configure your CertificateResolver here...
-certificatesResolvers:
-  staging:
-    acme:
-      email: eduardo11224b@gmail.com
-      storage: /etc/traefik/certs/acme.json
-      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
-      # -- (Optional) Remove this section, when using DNS Challenge
-      httpChallenge:
-        entryPoint: web
-      # # -- (Optional) Configure DNS Challenge
-      # dnsChallenge:
-      #   provider: your-resolver (e.g. cloudflare)
-      #   resolvers:
-      #     - "1.1.1.1:53"
-      #     - "8.8.8.8:53"
-  production:
-    acme:
-      email: eduardo11224b@gmail.com
-      storage: /etc/traefik/certs/acme.json
-      caServer: "https://acme-v02.api.letsencrypt.org/directory"
-      # -- (Optional) Remove this section, when using DNS Challenge
-      httpChallenge:
-        entryPoint: web
-      # # -- (Optional) Configure DNS Challenge
-      # dnsChallenge:
-      #   provider: your-resolver (e.g. cloudflare)
-      #   resolvers:
-      #     - "1.1.1.1:53"
-      #     - "8.8.8.8:53"
+# certificatesResolvers:
+#   staging:
+#     acme:
+#       email: guxace1029@gmail.com
+#       storage: /etc/traefik/certs/acme.json
+# tlsChallenge: {}
+# caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+# -- (Optional) Remove this section, when using DNS Challenge
+# httpChallenge:
+#   entryPoint: web
+# # -- (Optional) Configure DNS Challenge
+# dnsChallenge:
+#   provider: your-resolver (e.g. cloudflare)
+#   resolvers:
+#     - "1.1.1.1:53"
+#     - "8.8.8.8:53"
+# production:
+#   acme:
+#     email: guxace1029@gmail.com
+#     storage: /etc/traefik/certs/acme.json
+#     caServer: "https://acme-v02.api.letsencrypt.org/directory"
+# tlsChallenge: {}
+# -- (Optional) Remove this section, when using DNS Challenge
+# httpChallenge:
+#   entryPoint: web
+# # -- (Optional) Configure DNS Challenge
+# dnsChallenge:
+#   provider: your-resolver (e.g. cloudflare)
+#   resolvers:
+#     - "1.1.1.1:53"
+#     - "8.8.8.8:53"
 
 # -- (Optional) Disable TLS Cert verification check
 # serversTransport:
@@ -84,10 +88,10 @@ certificatesResolvers:
 #     default:
 #       minVersion: VersionTLS12
 
-providers:
-  docker:
-    # -- (Optional) Enable this, if you want to expose all containers automatically
-    exposedByDefault: false
-  file:
-    directory: /etc/traefik
-    watch: true
+# providers:
+#   docker:
+#     # -- (Optional) Enable this, if you want to expose all containers automatically
+#     exposedByDefault: false
+#   file:
+#     directory: /etc/traefik
+#     watch: true
