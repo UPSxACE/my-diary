@@ -50,6 +50,8 @@ services:
       - postgres_db
     networks:
       - traefik_network
+    env_file:
+      - .env
     labels:
       - traefik.enable=true
       - traefik.http.routers.api.rule=Host(`${API_HOSTNAME}`)
@@ -58,11 +60,20 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+        - NEXT_PUBLIC_COOKIE_DOMAIN=${NEXT_PUBLIC_COOKIE_DOMAIN}
+        - NEXT_PUBLIC_API_BASEURL=${NEXT_PUBLIC_API_BASEURL}
+        - NEXT_SERVER_API_BASEURL=${NEXT_SERVER_API_BASEURL}
+        - NEXT_SERVER_JWT_SECRET=${NEXT_SERVER_JWT_SECRET}
+        - NEXT_BUILD_STANDALONE=${NEXT_BUILD_STANDALONE}
     restart: unless-stopped
     depends_on:
       - api
     networks:
       - traefik_network
+    env_file:
+      - .env
     labels:
       - traefik.enable=true
       - traefik.http.routers.nextjs.rule=Host(`${WEB_HOSTNAME}`)
