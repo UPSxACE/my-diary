@@ -2,15 +2,18 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 
 	"github.com/UPSxACE/my-diary-api/server"
 	"github.com/joho/godotenv"
 )
+
 func main() {
 	err := godotenv.Load(".env")
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("NOTE: It was not possible to load the .env file.")
+		fmt.Println("You can ignore this message if you're currently in a production environment.")
 	}
 
 	if err := run(); err != nil {
