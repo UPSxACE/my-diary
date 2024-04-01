@@ -2,7 +2,7 @@ FROM golang:latest
 
 WORKDIR /app
 
-COPY go.mod go.sum .env ./
+COPY go.mod go.sum ./
 RUN go mod download
 RUN go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 
