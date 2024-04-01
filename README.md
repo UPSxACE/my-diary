@@ -9,6 +9,11 @@ If you don't want to use docker, you can also deploy the separate parts of the a
 - [NextJS repository](https://github.com/UPSxACE/my-diary-web)
 - [Golang API repository](https://github.com/UPSxACE/my-diary-api)
 
+## Table of Contents
+- [Features](#features)
+- [Development Prerequisites](#development-prerequisites)
+- [Installation and Setup](#installation-and-setup)
+
 ## Features
 * **Intuitive Interface:** Simple, clean, fast. Designed to be as straight-forward and minimalistic as possible.
 * **Format Notes:** With our WYSIWYG editor, you can structure your notes beyond simple boring text! Add titles, quotes, horizontal rule, italic text...
