@@ -5,11 +5,7 @@ import BurgerMenu from "./_components/burger-menu";
 import ExpandedMenu from "./_components/expanded-menu";
 import LogoutButton from "./_components/logout-button";
 
-export default async function AppShellHeader({
-  loggedIn,
-}: {
-  loggedIn: boolean;
-}) {
+export default function AppShellHeader({ loggedIn }: { loggedIn: boolean }) {
   // TODO
   // Decide menu items here
   // Then pass down to components
