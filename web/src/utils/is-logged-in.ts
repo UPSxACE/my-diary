@@ -5,7 +5,7 @@ export default function isLoggedIn() {
   const cookieStore = cookies();
   const loggedIn =
     cookieStore.has("myDiaryToken") &&
-    cookieStore.get("authToken")?.value !== "";
+    cookieStore.get("myDiaryToken")?.value !== "";
 
   return loggedIn;
 }
