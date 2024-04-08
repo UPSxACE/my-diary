@@ -22,7 +22,7 @@ export default function WipModal({ opened, close }: WipModalProps) {
       <div className="flex justify-center">
         <FaPersonDigging size={100} className="my-4" />
       </div>
-      <p>Welcome to our early version (v1.0.1-alpha) of the app! 🎉</p>
+      <p>Welcome to our early version (v1.0.2-alpha) of the app! 🎉</p>
       <p>This feature is not ready for use yet.</p>
       <p>
         Please note that this version is still in its infancy, and many features

@@ -1,6 +1,6 @@
 # MyDiary
 
-![version](https://img.shields.io/badge/version-v1.0.1--alpha-blue)
+![version](https://img.shields.io/badge/version-v1.0.2--alpha-blue)
 
 MyDiary is an intuitive fully open-source web application developed with Golang and Nextjs, for users who want a free and minimalistic alternative to keep their notes organized.
 With a user-friendly interface, MyDiary allows you to effortlessly jot down and save your thoughts, ideas, and important information.

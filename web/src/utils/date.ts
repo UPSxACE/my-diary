@@ -30,15 +30,15 @@ export function toEnglishMonth(monthNumber: number) {
 }
 
 export function toDateDMYString(date: Date) {
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = toEnglishMonth(date.getMonth());
-  const year = date.getFullYear();
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const month = toEnglishMonth(date.getUTCMonth());
+  const year = date.getUTCFullYear();
   return `${day} ${month}, ${year}`;
 }
 
 export function to12HourTimeString(date: Date) {
-  let hours: number | string = date.getHours();
-  let minutes: number | string = date.getMinutes();
+  let hours: number | string = date.getUTCHours();
+  let minutes: number | string = date.getUTCMinutes();
   const ampm = hours >= 12 ? "PM" : "AM";
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
