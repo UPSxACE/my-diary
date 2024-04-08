@@ -22,7 +22,7 @@ If you don't want to use docker, you can also deploy the separate parts of the a
 - **Intuitive Interface:** Simple, clean, fast. Designed to be as straight-forward and minimalistic as possible.
 - **Format Notes:** With our WYSIWYG editor, you can structure your notes beyond simple boring text! Add titles, quotes, horizontal rule, italic text...
 - **Code Blocks:** Support for more than 10 different programming languages.
-- **Free Forever:** The project is fully open source, and you will never be prompted to pay for anything. Clone the project and run an instance yourself, or use our [public](https://mydiary.project-lynx.com) instance.
+- **Free Forever:** The project is fully open source, and you will never be prompted to pay for anything. Clone the project and run an instance yourself, or use our [public](https://diary.acehq.net) instance.
 
 ## Development Prerequisites
 
